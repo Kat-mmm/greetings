@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+    <link rel="stylesheet" href="./greet.css">
+    <title>Greetings</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Greeting</h1>
+        <div class="stats">
+            <label for="name">Name: </label>
+            <input type="text" name="name" class="name">
+            <p>people greeted: <span class="greet-count"></span></p>
+        </div>
+
+        <div class="radio-btns">
+            <input type="radio" class="lang-radio" id="english" name="lang" value="English">
+            <label for="english">English</label>
+
+            <input type="radio" class="lang-radio" id="afrikaans" name="lang" value="Afrikaans">
+            <label for="afrikaans">Afrikaans</label>
+
+            <input type="radio" class="lang-radio" id="zulu" name="lang" value="isiZulu">
+            <label for="zulu">isiZulu</label>
+        </div>
+
+        <div class="btns">
+            <button class="greet-btn">Greet me</button>
+            <button class="reset-btn">Reset</button>
+        </div>
+        <p class="greet-text"></p>
+    </div>
+    <script src="./greet.js"></script>
+</body>
+</html>
