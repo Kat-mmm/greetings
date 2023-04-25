@@ -6,24 +6,26 @@ body, html{
 body{
     display: grid;
     place-items: center;
-    background-color: #fff;
+    background: linear-gradient(90deg, rgba(228,194,193,1) 0%, rgba(253,29,173,1) 24%, rgba(0,212,255,1) 100%);
     font-family: 'Inter', sans-serif;
 }
 
 .container{
-    background-color: #FBEAEB;
+    background-color: rgba(255, 255, 255, .15);  
+    backdrop-filter: blur(15px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 14px;
     width: 50%;
     min-width: 85%;
     padding-top: 20px;
     padding-bottom: 20px;
     height: fit-content;
     border-radius: 6px;
-    color: rgb(78, 75, 75);
+    color: rgb(73, 72, 72);
+    font-size: large;
 }
 
 .container:hover{
@@ -37,6 +39,12 @@ body{
 
 .stats{
     padding: 20px;
+}
+
+.greet-header{
+  margin-bottom: 0;
+  color: rgb(73, 72, 72);
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .stats p{
@@ -91,7 +99,7 @@ body{
     width: 100px;
     border-radius: 6px;
     border: 1px solid #00b4cc;
-    color: rgb(78, 75, 75);
+    color: rgb(43, 41, 41);
   }
 
   button:hover{

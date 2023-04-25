@@ -12,38 +12,41 @@ langRadioBtns.forEach((item) => {
     });
 });
 
-let names = JSON.parse(localStorage.getItem('names')) || [];
-let count = parseInt(localStorage.getItem('greetCount')) || 0;
-greetCountEl.innerHTML = count;
+const greetingsFactory = new greetings();
 
-greetBtn.addEventListener('click', () => {
-  // greetEl.textContent = `Hello, ${nameEl.value}`;
-  // nameEl.value = '';
+
+greetCountEl.innerHTML = greetingsFactory.getCount();
+
+function greetingsFunc(){
+  let userName = greetingsFactory.getName(nameEl.value);
+
   if(checkedVal === ''){
     alert("Please select a language");
   }
   
-  if(nameEl.value.trim() !== '' && !names.includes(nameEl.value.trim()) && checkedVal !== ''){
-    count++;
-    greetCountEl.innerHTML = count;
-    names.push(nameEl.value);
+  if(userName.trim() !== '' && !greetingsFactory.getNames().includes(userName) && checkedVal !== ''){
+    greetingsFactory.addCount();
+    greetCountEl.innerHTML = greetingsFactory.getCount();;
+    greetingsFactory.addName(userName);
 
-    localStorage.setItem('greetCount', count.toString());
-    localStorage.setItem('greetNames', JSON.stringify(names));
+    greetingsFactory.setCount();
+    greetingsFactory.setNames();
   }
   
-  if(checkedVal === 'English' && nameEl.value !== ''){
-    greetEl.textContent = `Hello, ${nameEl.value}`;
+  if(checkedVal === 'English' && userName !== ''){
+    greetEl.textContent = greetingsFactory.greet(userName);
   }
-  else if(checkedVal === 'Afrikaans' && nameEl.value !== ''){
-    greetEl.textContent = `Hallo, ${nameEl.value}`;
+  else if(checkedVal === 'Afrikaans' && userName !== ''){
+    greetEl.textContent = greetingsFactory.greetInAfrikaans(userName);
   }
-  else if(checkedVal === 'isiZulu' && nameEl.value !== ''){
-    greetEl.textContent = `Sawubona, ${nameEl.value}`;
+  else if(checkedVal === 'isiZulu' && userName !== ''){
+    greetEl.textContent = greetingsFactory.greetInIsiZulu(userName);
   }
 
   nameEl.value = '';
-});
+}
+
+greetBtn.addEventListener('click', greetingsFunc);
 
 resetBtn.addEventListener('click', ()=>{
   localStorage.clear();
