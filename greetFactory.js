@@ -53,7 +53,6 @@ function greetings(){
 
     function clearCount(){
         count = 0;
-        localStorage.clear();
     }
 
     return{
