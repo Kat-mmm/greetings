@@ -2,10 +2,16 @@ function greetings(){
     let count = parseInt(localStorage.getItem('greetCount')) || 0;
     let names = JSON.parse(localStorage.getItem('names')) || [];
     let theName = '';
+    let theLanguage = '';
 
     function getName(name){
         theName = name;
         return theName;
+    }
+
+    function getLanguage(language){
+        theLanguage = language;
+        return theLanguage;
     }
 
     function getCount(){
@@ -24,40 +30,50 @@ function greetings(){
         localStorage.setItem('greetNames', JSON.stringify(names));
     }
 
-    function greet(name){
-        return `Hello, ${name}`;
-    }
+    function greet(name, language){
+        language = theLanguage;
 
-    function greetInAfrikaans(name){
-        return `Hallo, ${name}`;
-    }
-
-    function greetInIsiZulu(name){
-        return `Sawubona, ${name}`;
+        if(name !== '' && !getNames().includes(name) && language !== ''){
+            addCount();
+            addName(name)
+        }
+        
+       if(name !== ''){
+            if(language === 'English'){
+                return `Hello, ${name}`;
+            }
+            else if(language === 'Afrikaans'){
+                return `Hallo, ${name}`;
+            }
+            else if(language === 'isiZulu'){
+                return `Sawubona, ${name}`;
+            }
+       }
     }
 
     function addCount(){
-        if(getName(theName).trim() !== '' && !greetingsFactory.getNames().includes(getName(theName)) && checkedVal !== ''){
-            count++;
-        }
+        count++;
     }
 
     function addName(name){
-        if(getName(theName).trim() !== '' && !greetingsFactory.getNames().includes(getName(theName)) && checkedVal !== ''){
-            names.push(getName(name));
-        }
+        names.push(getName(name));
+    }
+
+    function clearCount(){
+        count = 0;
+        localStorage.clear();
     }
 
     return{
         greet,
-        greetInAfrikaans,
-        greetInIsiZulu,
         getCount,
         getNames,
         addCount,
         addName,
         setCount,
         setNames,
-        getName
+        getName,
+        getLanguage,
+        clearCount
     }
 }

@@ -19,37 +19,35 @@ greetCountEl.innerHTML = greetingsFactory.getCount();
 
 function greetingsFunc(){
   let userName = greetingsFactory.getName(nameEl.value);
+  let language = greetingsFactory.getLanguage(checkedVal);
 
   if(checkedVal === ''){
     alert("Please select a language");
   }
   
   if(userName.trim() !== '' && !greetingsFactory.getNames().includes(userName) && checkedVal !== ''){
-    greetingsFactory.addCount();
+    // greetingsFactory.addCount();
+    greetEl.textContent = greetingsFactory.greet(userName, language);
     greetCountEl.innerHTML = greetingsFactory.getCount();;
-    greetingsFactory.addName(userName);
+    // greetingsFactory.addName(userName);
+
+    
 
     greetingsFactory.setCount();
     greetingsFactory.setNames();
   }
   
-  if(checkedVal === 'English' && userName !== ''){
-    greetEl.textContent = greetingsFactory.greet(userName);
-  }
-  else if(checkedVal === 'Afrikaans' && userName !== ''){
-    greetEl.textContent = greetingsFactory.greetInAfrikaans(userName);
-  }
-  else if(checkedVal === 'isiZulu' && userName !== ''){
-    greetEl.textContent = greetingsFactory.greetInIsiZulu(userName);
-  }
+  
 
   nameEl.value = '';
 }
 
 greetBtn.addEventListener('click', greetingsFunc);
 
-resetBtn.addEventListener('click', ()=>{
-  localStorage.clear();
+function clearAll(){
+  greetingsFactory.clearCount();
   location.reload();
-});
+}
+
+resetBtn.addEventListener('click', clearAll);
 
