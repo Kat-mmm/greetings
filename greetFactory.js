@@ -1,6 +1,6 @@
 function greetings(){
-    let count = parseInt(localStorage.getItem('greetCount')) || 0;
-    let names = JSON.parse(localStorage.getItem('names')) || [];
+    let count = 0;
+    let names = [];
     let theName = '';
     let theLanguage = '';
 
@@ -20,14 +20,6 @@ function greetings(){
 
     function getNames(){
         return names;
-    }
-
-    function setCount(){
-        localStorage.setItem('greetCount', count.toString());
-    }
-
-    function setNames(){
-        localStorage.setItem('greetNames', JSON.stringify(names));
     }
 
     function greet(name, language){
@@ -70,8 +62,6 @@ function greetings(){
         getNames,
         addCount,
         addName,
-        setCount,
-        setNames,
         getName,
         getLanguage,
         clearCount

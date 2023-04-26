@@ -14,39 +14,43 @@ langRadioBtns.forEach((item) => {
 
 const greetingsFactory = new greetings();
 
+let count = parseInt(localStorage.getItem('greetCount')) || 0;
+let names = JSON.parse(localStorage.getItem('names')) || greetingsFactory.getNames();
 
-greetCountEl.innerHTML = greetingsFactory.getCount();
+greetCountEl.innerHTML = count;
 
 function greetingsFunc(){
-  let userName = greetingsFactory.getName(nameEl.value);
+  let userName = greetingsFactory.getName(nameEl.value.replace(/\s/g, ''));
   let language = greetingsFactory.getLanguage(checkedVal);
 
-  if(checkedVal === ''){
-    alert("Please select a language");
-  }
+  const lettersOnlyRegex = /^[A-Za-z]+$/;
   
-  if(userName.trim() !== '' && !greetingsFactory.getNames().includes(userName) && checkedVal !== ''){
-    // greetingsFactory.addCount();
-    greetEl.textContent = greetingsFactory.greet(userName, language);
-    greetCountEl.innerHTML = greetingsFactory.getCount();;
-    // greetingsFactory.addName(userName);
+  if(userName.trim() !== '' && !names.includes(userName) && checkedVal !== ''){
 
+    if(lettersOnlyRegex.test(userName)){
+      greetEl.textContent = greetingsFactory.greet(greetingsFactory.getName(nameEl.value), language);
+      count++;
+    }
     
+    greetCountEl.innerHTML = count;
 
-    greetingsFactory.setCount();
-    greetingsFactory.setNames();
+    localStorage.setItem('greetCount', count.toString());
+    localStorage.setItem('greetNames', JSON.stringify(names));
   }
   
-  
-
   nameEl.value = '';
 }
 
 greetBtn.addEventListener('click', greetingsFunc);
 
 function clearAll(){
-  greetingsFactory.clearCount();
-  location.reload();
+  localStorage.clear();
+  greetCountEl.textContent = count;
+  greetEl.textContent = 'Reset Successfull';
+  setTimeout(()=>{
+    location.reload();
+  }, 1000)
+  
 }
 
 resetBtn.addEventListener('click', clearAll);
