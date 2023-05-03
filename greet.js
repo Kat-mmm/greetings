@@ -39,10 +39,16 @@ function greetingsFunc(){
       greetEl.textContent = greetingsFactory.greet(userName, language);
       count++;
     }
+    else{
+      greetEl.textContent = 'Error: Enter Letters only for name';
+    }
     greetCountEl.innerHTML = count;
 
     localStorage.setItem('greetCount', count.toString());
     localStorage.setItem('greetNames', JSON.stringify(names));
+  }
+  else{
+    greetEl.textContent = 'User already greeted!'
   }
   
   nameEl.value = '';
