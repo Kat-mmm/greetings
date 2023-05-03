@@ -24,9 +24,8 @@ describe('Greetings Tests', () => {
 
         it('When a user does not insert a language and a name there should be an error', () => {
             const greeting = new greetings();
-            const language = greeting.getLanguage('');
 
-            assert.equal('Error: Enter a eunique name and language', greeting.greet('', language));
+            assert.equal('Error: Enter a eunique name and language', greeting.greet('', ''));
         })
     })
     describe('Should be able to greet a user in different Languages', () => {

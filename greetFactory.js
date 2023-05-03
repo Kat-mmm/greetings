@@ -39,16 +39,16 @@ function greetings(){
                 return `Sawubona, ${name}`;
             }
         }
+        else if(name === '' && language === ''){
+            return 'Error: Enter a eunique name and language';
+        }
         else if(language === ''){
             return 'Error: No language selected'
         }
         else if(name.replace(/\s/g, '').toLowerCase() === ''){
             return 'Error: No name detected'
         }
-        else{
-            return 'Error: Enter a eunique name and language';
-        }
-        
+       
     }
 
     function addCount(){
