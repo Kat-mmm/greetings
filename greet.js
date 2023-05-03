@@ -24,13 +24,21 @@ function greetingsFunc(){
   let language = greetingsFactory.getLanguage(checkedVal);
 
   const lettersOnlyRegex = /^[A-Za-z]+$/;
+  if(language === ''){
+    greetEl.textContent = greetingsFactory.greet(userName, language);
+  }
+  else if(userName === ''){
+    greetEl.textContent = greetingsFactory.greet(userName, language);
+  }
+  else if(language === '' && userName === ''){
+    greetEl.textContent = greetingsFactory.greet(userName, language);
+  }
   
   if(userName.replace(/\s/g, '').toLowerCase() !== '' && !names.includes(userName.replace(/\s/g, '').toLowerCase()) && checkedVal !== ''){
     if(lettersOnlyRegex.test(userName.replace(/\s/g, '').toLowerCase())){
       greetEl.textContent = greetingsFactory.greet(userName, language);
       count++;
     }
-    
     greetCountEl.innerHTML = count;
 
     localStorage.setItem('greetCount', count.toString());

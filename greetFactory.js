@@ -40,7 +40,7 @@ function greetings(){
             }
         }
         else if(name === '' && language === ''){
-            return 'Error: Enter a eunique name and language';
+            return 'Error: Enter a name and language';
         }
         else if(language === ''){
             return 'Error: No language selected'
