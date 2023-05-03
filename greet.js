@@ -26,21 +26,26 @@ function greetingsFunc(){
   const lettersOnlyRegex = /^[A-Za-z]+$/;
   if(language === ''){
     greetEl.textContent = greetingsFactory.greet(userName, language);
+    greetEl.classList.add('error');
   }
   else if(userName === ''){
     greetEl.textContent = greetingsFactory.greet(userName, language);
+    greetEl.classList.add('error');
   }
   else if(language === '' && userName === ''){
     greetEl.textContent = greetingsFactory.greet(userName, language);
+    greetEl.classList.add('error');
   }
   
   if(userName.replace(/\s/g, '').toLowerCase() !== '' && !names.includes(userName.replace(/\s/g, '').toLowerCase()) && checkedVal !== ''){
     if(lettersOnlyRegex.test(userName.replace(/\s/g, '').toLowerCase())){
       greetEl.textContent = greetingsFactory.greet(userName, language);
+      greetEl.classList.remove('error');
       count++;
     }
     else{
       greetEl.textContent = 'Error: Enter Letters only for name';
+      greetEl.classList.add('error');
     }
     greetCountEl.innerHTML = count;
 
@@ -54,12 +59,15 @@ function greetingsFunc(){
 greetBtn.addEventListener('click', greetingsFunc);
 
 function clearAll(){
-  localStorage.clear();
-  greetCountEl.textContent = count;
-  greetEl.textContent = 'Reset Successfull';
-  setTimeout(()=>{
-    location.reload();
-  }, 1000)
+  if(count > 0 || names.length > 0 ){
+    localStorage.clear();
+    greetCountEl.textContent = count;
+    greetEl.textContent = 'Reset Successfull';
+    greetEl.classList.add('success');
+    setTimeout(()=>{
+      location.reload();
+    }, 1000)
+  }
 }
 
 resetBtn.addEventListener('click', clearAll);

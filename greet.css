@@ -108,5 +108,13 @@ body{
     border: 1.1px solid #2F3C7E;
     color: #2F3C7E;
   }
+
+  .error{
+    color: red;
+  }
+
+  .success{
+    color: green;
+  }
   
   
