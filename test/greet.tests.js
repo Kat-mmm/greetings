@@ -8,11 +8,25 @@ describe('Greetings Tests', () => {
             assert.equal('Hello, Daniel', greeting.greet('Daniel', language));
         })
 
-        it('When a user does not insert a name there should be no greeting', () => {
+        it('When a user does not insert a name there should be an error', () => {
             const greeting = new greetings();
             const language = greeting.getLanguage('English');
 
-            assert.equal(undefined, greeting.greet('', language));
+            assert.equal('Error: No name detected', greeting.greet('', language));
+        })
+
+        it('When a user does not insert a language there should an error', () => {
+            const greeting = new greetings();
+            const language = greeting.getLanguage('');
+
+            assert.equal('Error: No language selected', greeting.greet('Kat', language));
+        })
+
+        it('When a user does not insert a language and a name there should be an error', () => {
+            const greeting = new greetings();
+            const language = greeting.getLanguage('');
+
+            assert.equal('Error: Enter a eunique name and language', greeting.greet('', language));
         })
     })
     describe('Should be able to greet a user in different Languages', () => {

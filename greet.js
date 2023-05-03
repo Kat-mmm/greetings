@@ -20,15 +20,14 @@ let names = JSON.parse(localStorage.getItem('names')) || greetingsFactory.getNam
 greetCountEl.innerHTML = count;
 
 function greetingsFunc(){
-  let userName = greetingsFactory.getName(nameEl.value.replace(/\s/g, ''));
+  let userName = greetingsFactory.getName(nameEl.value);
   let language = greetingsFactory.getLanguage(checkedVal);
 
   const lettersOnlyRegex = /^[A-Za-z]+$/;
   
-  if(userName.trim() !== '' && !names.includes(userName) && checkedVal !== ''){
-
-    if(lettersOnlyRegex.test(userName)){
-      greetEl.textContent = greetingsFactory.greet(greetingsFactory.getName(nameEl.value), language);
+  if(userName.replace(/\s/g, '').toLowerCase() !== '' && !names.includes(userName.replace(/\s/g, '').toLowerCase()) && checkedVal !== ''){
+    if(lettersOnlyRegex.test(userName.replace(/\s/g, '').toLowerCase())){
+      greetEl.textContent = greetingsFactory.greet(userName, language);
       count++;
     }
     

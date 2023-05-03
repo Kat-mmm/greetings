@@ -25,12 +25,10 @@ function greetings(){
     function greet(name, language){
         language = theLanguage;
 
-        if(name !== '' && !getNames().includes(name) && language !== ''){
+        if(name.replace(/\s/g, '').toLowerCase() !== '' && !getNames().includes(name.replace(/\s/g, '').toLowerCase()) && language !== ''){
             addCount();
-            addName(name)
-        }
-        
-       if(name !== ''){
+            addName(name.replace(/\s/g, '').toLowerCase())
+
             if(language === 'English'){
                 return `Hello, ${name}`;
             }
@@ -40,7 +38,17 @@ function greetings(){
             else if(language === 'isiZulu'){
                 return `Sawubona, ${name}`;
             }
-       }
+        }
+        else if(language === ''){
+            return 'Error: No language selected'
+        }
+        else if(name.replace(/\s/g, '').toLowerCase() === ''){
+            return 'Error: No name detected'
+        }
+        else{
+            return 'Error: Enter a eunique name and language';
+        }
+        
     }
 
     function addCount(){
