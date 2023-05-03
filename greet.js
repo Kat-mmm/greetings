@@ -47,9 +47,6 @@ function greetingsFunc(){
     localStorage.setItem('greetCount', count.toString());
     localStorage.setItem('greetNames', JSON.stringify(names));
   }
-  else{
-    greetEl.textContent = 'User already greeted!'
-  }
   
   nameEl.value = '';
 }
@@ -63,7 +60,6 @@ function clearAll(){
   setTimeout(()=>{
     location.reload();
   }, 1000)
-  
 }
 
 resetBtn.addEventListener('click', clearAll);
