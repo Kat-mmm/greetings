@@ -28,14 +28,24 @@ function greetingsFunc(){
   if(language === ''){
     errorEl.textContent = greetingsFactory.greet(userName, '');
     errorEl.classList.add('error');
+    setTimeout(()=>{
+      errorEl.textContent = '';
+    }, 2000)
+    
   }
   else if(userName === ''){
     errorEl.textContent = greetingsFactory.greet('', language);
     errorEl.classList.add('error');
+    setTimeout(()=>{
+      errorEl.textContent = '';
+    }, 2000)
   }
   else if(language === '' && userName === ''){
     errorEl.textContent = greetingsFactory.greet('', '');
     errorEl.classList.add('error');
+    setTimeout(function(){
+      errorEl.textContent = '';
+    }, 2000)
   }
   else{
     errorEl.textContent = '';
