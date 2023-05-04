@@ -67,10 +67,11 @@ function clearAll(){
     localStorage.clear();
     greetEl.textContent = 'Reset Successfull';
     greetEl.classList.add('success');
+    setTimeout(()=>{
+      location.reload();
+    }, 1000)
   }
-  setTimeout(()=>{
-    location.reload();
-  }, 1000)
+  
 }
 
 resetBtn.addEventListener('click', clearAll);
