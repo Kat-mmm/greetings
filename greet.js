@@ -4,6 +4,7 @@ const resetBtn = document.querySelector('.reset-btn');
 let greetEl = document.querySelector('.greet-text');
 const langRadioBtns = document.querySelectorAll('.lang-radio');
 let greetCountEl = document.querySelector('.greet-count');
+let errorEl = document.querySelector('.errors');
 
 let checkedVal = '';
 langRadioBtns.forEach((item) => {
@@ -12,7 +13,7 @@ langRadioBtns.forEach((item) => {
     });
 });
 
-const greetingsFactory = new greetings();
+const greetingsFactory = new Greetings();
 
 let count = parseInt(localStorage.getItem('greetCount')) || 0;
 let names = JSON.parse(localStorage.getItem('names')) || greetingsFactory.getNames();
@@ -25,27 +26,29 @@ function greetingsFunc(){
 
   const lettersOnlyRegex = /^[A-Za-z]+$/;
   if(language === ''){
-    greetEl.textContent = greetingsFactory.greet(userName, language);
-    greetEl.classList.add('error');
+    errorEl.textContent = greetingsFactory.greet(userName, '');
+    errorEl.classList.add('error');
   }
   else if(userName === ''){
-    greetEl.textContent = greetingsFactory.greet(userName, language);
-    greetEl.classList.add('error');
+    errorEl.textContent = greetingsFactory.greet('', language);
+    errorEl.classList.add('error');
   }
   else if(language === '' && userName === ''){
-    greetEl.textContent = greetingsFactory.greet(userName, language);
-    greetEl.classList.add('error');
+    errorEl.textContent = greetingsFactory.greet('', '');
+    errorEl.classList.add('error');
+  }
+  else{
+    errorEl.textContent = '';
   }
   
   if(userName.replace(/\s/g, '').toLowerCase() !== '' && !names.includes(userName.replace(/\s/g, '').toLowerCase()) && checkedVal !== ''){
     if(lettersOnlyRegex.test(userName.replace(/\s/g, '').toLowerCase())){
       greetEl.textContent = greetingsFactory.greet(userName, language);
-      greetEl.classList.remove('error');
       count++;
     }
     else{
-      greetEl.textContent = 'Error: Enter Letters only for name';
-      greetEl.classList.add('error');
+      errorEl.textContent = 'Enter Letters only for name';
+      errorEl.classList.add('error');
     }
     greetCountEl.innerHTML = count;
 
@@ -59,15 +62,15 @@ function greetingsFunc(){
 greetBtn.addEventListener('click', greetingsFunc);
 
 function clearAll(){
+  greetCountEl.textContent = 0;
   if(count > 0 || names.length > 0 ){
     localStorage.clear();
-    greetCountEl.textContent = count;
     greetEl.textContent = 'Reset Successfull';
     greetEl.classList.add('success');
-    setTimeout(()=>{
-      location.reload();
-    }, 1000)
   }
+  setTimeout(()=>{
+    location.reload();
+  }, 1000)
 }
 
 resetBtn.addEventListener('click', clearAll);

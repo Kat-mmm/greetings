@@ -1,4 +1,4 @@
-function greetings(){
+function Greetings(){
     let count = 0;
     let names = [];
     let theName = '';
@@ -40,13 +40,13 @@ function greetings(){
             }
         }
         else if(name === '' && language === ''){
-            return 'Error: Enter a name and language';
+            return 'Enter a name and language';
         }
         else if(language === ''){
-            return 'Error: No language selected'
+            return 'No language selected'
         }
         else if(name.replace(/\s/g, '').toLowerCase() === ''){
-            return 'Error: No name detected'
+            return 'No name detected'
         }
        
     }
