@@ -54,6 +54,9 @@ function greetingsFunc(){
   if(userName.replace(/\s/g, '').toLowerCase() !== '' && !names.includes(userName.replace(/\s/g, '').toLowerCase()) && checkedVal !== ''){
     if(lettersOnlyRegex.test(userName.replace(/\s/g, '').toLowerCase())){
       greetEl.textContent = greetingsFactory.greet(userName, language);
+      setTimeout(()=>{
+        greetEl.textContent = '';
+      }, 2500)
       count++;
     }
     else{
